@@ -1,6 +1,9 @@
+ ![logo](https://github.com/pablopunk/art/raw/master/randomify/spotify.png)
+
 # randomify
 
 > Add random tracks from a playlist to another one
+
 
 ## Why?
 

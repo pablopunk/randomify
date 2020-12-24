@@ -1,19 +1,21 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next'
 import { api } from 'lib/spotify'
+import writeJsonFile from 'write-json-file'
 
-export default async function Authorize(req: NextApiRequest, res: NextApiResponse) {
+export default async function Authorize(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { code } = req.query
 
   if (!code) {
-    res.status(403).send("403")
+    res.status(403).send('403')
   }
 
-  const data = await api.authorizationCodeGrant(code)
+  writeJsonFile('auth.json', { code })
 
-  api.setAccessToken(data.body['access_token']);
-  api.setRefreshToken(data.body['refresh_token']);
-
-  const exampleUrl = '/api/random?from=0vvXsWCC9xrXsKd4FyS8kM&to=5lQGOyqFXzCOVisAKDdiDr'
+  const exampleUrl =
+    '/api/random?from=0vvXsWCC9xrXsKd4FyS8kM&to=5lQGOyqFXzCOVisAKDdiDr'
 
   res.status(200).send(`
 <p>Success!</p>
